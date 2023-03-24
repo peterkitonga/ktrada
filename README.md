@@ -14,9 +14,9 @@
 
 - [x] Initialize frontend application
 - [x] Initialize backend application
+- [x] Add Jest to frontend application
+- [x] Add Cypress to frontend application
 - [ ] Add dependencies for the backend(Express, Jest, Nodemon, Typescript)
-- [ ] Add Jest to frontend application
-- [ ] Add Cypress to frontend application
 
 ## Authors
 
