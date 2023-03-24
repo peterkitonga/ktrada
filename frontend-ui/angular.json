@@ -86,13 +86,16 @@
         "test": {
           "builder": "@angular-builders/jest:run",
           "options": {
-            "main": [],
-            "polyfills": "src/polyfills.ts",
+            "configPath": "jest.config.js",
             "tsConfig": "tsconfig.spec.json",
+            "polyfills": ["src/polyfills.ts"],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

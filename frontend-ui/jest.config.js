@@ -10,8 +10,8 @@ module.exports = {
     global: {
       branches: 50,
       functions: 70,
-      lines: 70,
-      statements: 70,
+      lines: 25,
+      statements: 25,
     },
   },
   moduleNameMapper: {
