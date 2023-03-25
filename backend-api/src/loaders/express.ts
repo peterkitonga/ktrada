@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 
+import cors from 'cors';
 import path from 'path';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
@@ -15,10 +16,10 @@ import { HttpStatusCodes } from '@src/shared/enums/http-status';
 import BaseError from '@src/shared/errors/base';
 
 class ExpressApp {
-  private app: Application = express();
+  public app: Application;
 
   public constructor() {
-    //
+    this.app = express();
   }
 
   /**
@@ -71,6 +72,22 @@ class ExpressApp {
     return server.close(() => {
       WinstonLogger.info('Server shutdown successfully!');
     });
+  }
+
+  /**
+   * Creates a middleware that sets up rules
+   * for cross-origin requests.
+   *
+   * @return {void}
+   */
+  public setupCors(): void {
+    this.app.use(
+      cors({
+        origin: process.env.APP_ALLOWED_ORIGINS!.split(','),
+        credentials: true,
+        preflightContinue: true,
+      }),
+    );
   }
 
   /**
