@@ -1,1 +1,1 @@
-Closes #[id]
+- Closes #[id]
