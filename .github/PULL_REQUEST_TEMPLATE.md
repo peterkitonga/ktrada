@@ -1,1 +1,2 @@
-**[[KTR UI] :: Example](https://github.com/peterkitonga/ktrada/issues/[id])**
+- **[[KTR UI] :: Example](https://github.com/peterkitonga/ktrada/issues/[id])**
+- Closes #[id]
