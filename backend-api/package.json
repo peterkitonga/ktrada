@@ -4,6 +4,8 @@
   "description": "Backend api built with express.js",
   "main": "src/app.ts",
   "scripts": {
+    "start": "nodemon src/app.ts",
+    "build": "tsc --project . && tsc-alias -p tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src/**/*.ts",
     "lint:format": "eslint src/**/*.ts --fix"
@@ -35,6 +37,8 @@
     "prettier": "^2.8.7",
     "supertest": "^6.3.3",
     "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.4",
+    "tsconfig-paths": "^4.1.2",
     "typescript": "^5.0.2"
   }
 }
