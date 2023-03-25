@@ -30,13 +30,16 @@ class ExpressApp {
   public init(): void {
     this.setupBodyParser();
 
+    this.setupCors();
     this.setupHelmet();
 
     this.handleHomeRoute();
     this.handleNonExistingRoute();
     this.handleErrorMiddleware();
 
-    this.listen();
+    if (configs.app.env !== 'test') {
+      this.listen();
+    }
   }
 
   /**
@@ -131,7 +134,6 @@ class ExpressApp {
   public handleNonExistingRoute(): void {
     this.app.use((req: Request, res: Response) => {
       res.status(HttpStatusCodes.NOT_FOUND).json({
-        status: 'error',
         message: `${req.method} route for '${req.path}' not found`,
       });
     });

@@ -4,7 +4,7 @@ import configs from '@src/configs';
 import { storagePath } from '@src/utils/path';
 
 class WinstonLogger {
-  private logger: Logger;
+  public logger: Logger;
 
   public constructor() {
     this.logger = createLogger({
