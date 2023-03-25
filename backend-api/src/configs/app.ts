@@ -9,4 +9,5 @@ export default {
       return `/api/${this.version}`;
     },
   },
+  origins: process.env.APP_ALLOWED_ORIGINS!.split(','),
 };
