@@ -1,6 +1,9 @@
-import { Dialect, Sequelize } from 'sequelize';
+import { Dialect } from 'sequelize';
+import { Sequelize } from 'sequelize-typescript';
 
 import configs from '@src/configs';
+import StockPrice from '@src/models/stock-price';
+
 import { AppResponse } from '@src/shared/interfaces';
 
 class SequelizeConnect {
@@ -19,6 +22,7 @@ class SequelizeConnect {
       },
       sync: { force: false },
     });
+    this.sequelize.addModels([StockPrice]);
   }
 
   /**
@@ -29,6 +33,7 @@ class SequelizeConnect {
   public async connectDatabase(): Promise<AppResponse<null>> {
     try {
       await this.sequelize.authenticate();
+      await this.sequelize.sync();
 
       return { message: 'DATABASE CONNECTED!' };
     } catch (err) {
