@@ -17,9 +17,9 @@
 - [x] Add Jest to frontend application
 - [x] Add Cypress to frontend application
 - [x] Add dependencies for the backend(Express, Jest, Nodemon, Typescript)
-- [ ] Add & configure HTTP server for the backend
-- [ ] Add Jest to backend application
-- [ ] Add ORM for database abstraction & querying
+- [x] Add & configure HTTP server for the backend
+- [x] Add Jest to backend application
+- [x] Add ORM for database abstraction & querying
 - [ ] Add database seeders for initial data to be stored
 - [ ] Add dependency injection for the backend services & repositories
 
