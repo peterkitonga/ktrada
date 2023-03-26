@@ -3,6 +3,7 @@ import request from 'supertest';
 
 import ExpressApp from '@src/loaders/express';
 import WinstonLogger from '@src/loaders/winston';
+import SequelizeConnect from '@src/loaders/sequelize';
 import configs from '@src/configs';
 
 describe('src/loaders/express: class ExpressApp', () => {
@@ -73,6 +74,36 @@ describe('src/loaders/express: class ExpressApp', () => {
       ExpressApp.gracefulShutdown(server);
 
       expect(closeMock).toHaveBeenCalled();
+    });
+  });
+
+  describe('connectDatabase()', () => {
+    it('should load connection to database', async () => {
+      const databaseConnectMock = jest.fn().mockResolvedValue({ message: 'CONNECTED' });
+
+      SequelizeConnect.connectDatabase = databaseConnectMock;
+
+      await ExpressApp.connectDatabase();
+
+      expect(databaseConnectMock).toHaveBeenCalled();
+    });
+
+    it('should log any connection errors', async () => {
+      const databaseConnectMock = jest.fn().mockRejectedValue(new Error('CONNECTION ERROR'));
+      const loggerErrorMock = jest.fn();
+
+      SequelizeConnect.connectDatabase = databaseConnectMock;
+      WinstonLogger.error = loggerErrorMock;
+
+      try {
+        await ExpressApp.connectDatabase();
+      } catch (err) {
+        const error = err as Error;
+
+        expect(error.message).toBe('CONNECTION ERROR');
+      }
+
+      expect(loggerErrorMock).toHaveBeenCalledWith('CONNECTION ERROR');
     });
   });
 });
