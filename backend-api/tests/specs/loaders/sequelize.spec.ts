@@ -7,14 +7,17 @@ describe('src/loaders/sequelize.ts: class SequelizeConnect', () => {
 
   describe('connectDatabase()', () => {
     const authenticateMock = jest.fn();
+    const syncMock = jest.fn();
 
     it('should establish connection to the database', async () => {
       authenticateMock.mockResolvedValue(null);
       SequelizeConnect.sequelize.authenticate = authenticateMock;
+      SequelizeConnect.sequelize.sync = syncMock;
 
       await SequelizeConnect.connectDatabase();
 
       expect(authenticateMock).toHaveBeenCalled();
+      expect(syncMock).toHaveBeenCalled();
     });
 
     it('should handle database connection errors', async () => {
