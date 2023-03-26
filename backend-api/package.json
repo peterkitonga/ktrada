@@ -30,6 +30,7 @@
     "sequelize": "^6.30.0",
     "sequelize-cli": "^6.6.0",
     "sequelize-typescript": "^2.1.5",
+    "typedi": "^0.10.0",
     "winston": "^3.8.2"
   },
   "devDependencies": {
