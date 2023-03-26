@@ -12,8 +12,10 @@ dotenvExpand.expand(dotenv.config({ path: path.resolve('.env') }));
 
 import configs from '@src/configs';
 import WinstonLogger from '@src/loaders/winston';
-import { HttpStatusCodes } from '@src/shared/enums/http-status';
+import SequelizeConnect from '@src/loaders/sequelize';
+
 import BaseError from '@src/shared/errors/base';
+import { HttpStatusCodes } from '@src/shared/enums/http-status';
 
 class ExpressApp {
   public app: Application;
@@ -38,7 +40,9 @@ class ExpressApp {
     this.handleErrorMiddleware();
 
     if (configs.app.env !== 'test') {
-      this.listen();
+      this.connectDatabase().then(() => {
+        this.listen();
+      });
     }
   }
 
@@ -71,10 +75,31 @@ class ExpressApp {
    * @param {Server} server Instance of http.Server.
    * @return {Server}
    */
-  public gracefulShutdown(server: Server) {
+  public gracefulShutdown(server: Server): Server {
     return server.close(() => {
       WinstonLogger.info('Server shutdown successfully!');
+
+      SequelizeConnect.disconnetDatabase()
+        .then((res) => WinstonLogger.info(res.message!))
+        .catch((err: Error) => WinstonLogger.error(err.message));
     });
+  }
+
+  /**
+   * Initializes database connection.
+   *
+   * @return {Promise<void>}
+   */
+  public async connectDatabase(): Promise<void> {
+    try {
+      const { message } = await SequelizeConnect.connectDatabase();
+
+      WinstonLogger.info(message!);
+    } catch (err) {
+      const error = err as Error;
+
+      WinstonLogger.error(error.message);
+    }
   }
 
   /**
