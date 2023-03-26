@@ -33,6 +33,7 @@ class SequelizeConnect {
   public async connectDatabase(): Promise<AppResponse<null>> {
     try {
       await this.sequelize.authenticate();
+      await this.sequelize.sync();
 
       return { message: 'DATABASE CONNECTED!' };
     } catch (err) {
