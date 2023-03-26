@@ -11,9 +11,12 @@ interface StockPriceAttributes {
   updatedAt: Date;
 }
 
-type StockPriceCreationAttributes = Optional<StockPriceAttributes, 'id'>;
+type StockPriceCreationAttributes = Optional<StockPriceAttributes, 'id' | 'createdAt' | 'updatedAt'>;
 
-@Table
+@Table({
+  modelName: 'StockPrice',
+  tableName: 'stock_prices',
+})
 export default class StockPrice extends Model<StockPriceAttributes, StockPriceCreationAttributes> {
   @Column(DataType.STRING)
   companyName!: string;
