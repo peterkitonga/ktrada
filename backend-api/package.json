@@ -9,7 +9,11 @@
     "test": "NODE_ENV=test jest --detectOpenHandles",
     "test:view": "open-cli coverage/lcov-report/index.html",
     "lint": "eslint src/**/*.ts",
-    "lint:format": "eslint src/**/*.ts --fix"
+    "lint:format": "eslint src/**/*.ts --fix",
+    "db:migrate": "sequelize db:migrate",
+    "db:migrate:undo": "sequelize db:migrate:undo:all",
+    "db:seed": "sequelize db:seed:all",
+    "db:seed:undo": "sequelize db:seed:undo"
   },
   "author": "peterkitonga",
   "license": "ISC",
@@ -21,8 +25,10 @@
     "helmet": "^6.0.1",
     "joi": "^17.9.1",
     "mysql2": "^3.2.0",
+    "node-fetch": "^3.3.1",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.30.0",
+    "sequelize-cli": "^6.6.0",
     "sequelize-typescript": "^2.1.5",
     "winston": "^3.8.2"
   },
