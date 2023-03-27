@@ -6,7 +6,7 @@ import NotFoundError from '@src/shared/errors/not-found';
 
 @Service()
 export class StockPriceRepository implements BaseRepository<StockPriceModel> {
-  async create(item: StockPriceModel): Promise<boolean> {
+  public async create(item: StockPriceModel): Promise<boolean> {
     try {
       const stockPrice = new StockPrice(item);
       await stockPrice.save();
@@ -17,9 +17,9 @@ export class StockPriceRepository implements BaseRepository<StockPriceModel> {
     }
   }
 
-  async update(id: number, item: StockPriceModel): Promise<boolean> {
+  public async update(symbol: string, item: StockPriceModel): Promise<boolean> {
     try {
-      const stockPrice = await StockPrice.findByPk(id);
+      const stockPrice = await StockPrice.findOne({ where: { tickerSymbol: symbol } });
 
       if (stockPrice) {
         stockPrice.companyName = item.companyName;
@@ -30,30 +30,30 @@ export class StockPriceRepository implements BaseRepository<StockPriceModel> {
 
         return true;
       } else {
-        throw new NotFoundError(`Stock price #${id} not found.`);
+        throw new NotFoundError(`Stock price for ${symbol} not found.`);
       }
     } catch (err) {
       throw err;
     }
   }
 
-  async delete(id: number): Promise<boolean> {
+  public async delete(symbol: string): Promise<boolean> {
     try {
-      const stockPrice = await StockPrice.findByPk(id);
+      const stockPrice = await StockPrice.findOne({ where: { tickerSymbol: symbol } });
 
       if (stockPrice) {
         await stockPrice.destroy();
 
         return true;
       } else {
-        throw new NotFoundError(`Stock price #${id} not found.`);
+        throw new NotFoundError(`Stock price for ${symbol} not found.`);
       }
     } catch (err) {
       throw err;
     }
   }
 
-  getAll() {
+  public getAll() {
     console.log('Getting all the stocks');
   }
 }
