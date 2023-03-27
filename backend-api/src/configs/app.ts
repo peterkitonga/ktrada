@@ -10,4 +10,5 @@ export default {
     },
   },
   origins: process.env.APP_ALLOWED_ORIGINS!.split(','),
+  yahooFinanceBaseUrl: 'https://query1.finance.yahoo.com',
 };
