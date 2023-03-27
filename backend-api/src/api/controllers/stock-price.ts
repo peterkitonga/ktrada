@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from 'express';
 import Autobind from '@src/shared/decorators/autobind';
 import StockPriceService from '@src/services/stock-price';
 import { HttpStatusCodes } from '@src/shared/enums/http-status';
-import { Paginate, PaginatedResponse, StockPriceModel } from '@src/shared/interfaces';
+import { AppResponse, Paginate, PaginatedResponse, Security, StockPriceModel } from '@src/shared/interfaces';
 
 @Service()
 export default class StockPricesController {
@@ -23,6 +23,23 @@ export default class StockPricesController {
       const stockPricesResponse = await this.stockPriceService.getStockPrices(params);
 
       res.status(HttpStatusCodes.OK).json(stockPricesResponse);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  @Autobind
+  public async getSecurities(
+    req: Request<unknown, unknown, unknown, { q: string }>,
+    res: Response<AppResponse<Security[]>>,
+    next: NextFunction,
+  ): Promise<void> {
+    try {
+      const params = req.query;
+
+      const securitiesResponse = await this.stockPriceService.getSecuritiesByQuery(params.q);
+
+      res.status(HttpStatusCodes.OK).json(securitiesResponse);
     } catch (err) {
       next(err);
     }
