@@ -9,7 +9,8 @@
     "test": "ng test",
     "test:coverage": "ng test --coverage",
     "e2e": "npx cypress open --e2e",
-    "e2e:headless": "npx cypress run --e2e --headless"
+    "e2e:headless": "npx cypress run --e2e --headless",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -28,11 +29,23 @@
   "devDependencies": {
     "@angular-builders/jest": "^14.1.0",
     "@angular-devkit/build-angular": "^14.2.11",
+    "@angular-eslint/builder": "14.2.0",
+    "@angular-eslint/eslint-plugin": "14.2.0",
+    "@angular-eslint/eslint-plugin-template": "14.2.0",
+    "@angular-eslint/schematics": "14.2.0",
+    "@angular-eslint/template-parser": "14.2.0",
     "@angular/cli": "~14.2.11",
     "@angular/compiler-cli": "^14.2.0",
     "@types/jest": "^28.1.1",
+    "@typescript-eslint/eslint-plugin": "5.43.0",
+    "@typescript-eslint/parser": "5.43.0",
     "cypress": "^12.8.1",
+    "eslint": "^8.27.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "jest": "^28.1.3",
+    "prettier": "^2.8.7",
+    "prettier-eslint": "^15.0.1",
     "typescript": "~4.7.2"
   }
 }
