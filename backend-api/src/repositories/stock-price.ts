@@ -60,7 +60,7 @@ export default class StockPriceRepository implements BaseRepository<StockPriceMo
     order,
   }: Paginate): Promise<{ results: StockPriceModel[]; total: number }> {
     try {
-      const offset = Number(page) * Number(pageSize);
+      const offset = 0 + (Number(page) - 1) * Number(pageSize);
       const limit = Number(pageSize);
 
       col = col ? col : 'createdAt';
