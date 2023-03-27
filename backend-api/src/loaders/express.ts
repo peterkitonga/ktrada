@@ -11,6 +11,7 @@ import express, { Request, Response, NextFunction, Application, json } from 'exp
 dotenvExpand.expand(dotenv.config({ path: path.resolve('.env') }));
 
 import configs from '@src/configs';
+import routes from '@src/api/routes';
 import WinstonLogger from '@src/loaders/winston';
 import SequelizeConnect from '@src/loaders/sequelize';
 
@@ -36,6 +37,7 @@ class ExpressApp {
     this.setupHelmet();
 
     this.handleHomeRoute();
+    this.handleAppRoutes();
     this.handleNonExistingRoute();
     this.handleErrorMiddleware();
 
@@ -149,6 +151,15 @@ class ExpressApp {
         version: configs.app.api.version,
       });
     });
+  }
+
+  /**
+   * Sets up the application routes.
+   *
+   * @return {void}
+   */
+  public handleAppRoutes(): void {
+    this.app.use(configs.app.api.prefix(), routes());
   }
 
   /**
