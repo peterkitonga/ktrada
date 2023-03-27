@@ -21,12 +21,9 @@
     "module": "es2020",
     "paths": {
       "@src/*": ["src/*"],
-      "@tests/*": ["tests/*"],
+      "@tests/*": ["tests/*"]
     },
-    "lib": [
-      "es2020",
-      "dom"
-    ]
+    "lib": ["es2020", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
