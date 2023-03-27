@@ -8,7 +8,7 @@
 - [TypeScript](https://www.typescriptlang.org/) - For type safety and other awesome features not native to vanilla JavaScript.
 - [Express](https://expressjs.com/) - Micro-framework for setting up routes, middlewares, controllers.
 - [Angular](https://angular.io/) - Component base front-end framework.
-- [Bootstrap 5](https://getbootstrap.com/docs/5.3/getting-started/introduction/) - HTML/CSS framework.
+- [Prime NG](https://primeng.org/) - Component library for Angular.
 
 ## Roadmap
 
@@ -23,7 +23,11 @@
 - [x] Add database seeders for initial data to be stored
 - [x] Add dependency injection for the backend services & repositories
 - [x] Add paginated response for the stock prices
-- [ ] Add API endpoints for fetching the stock prices
+- [x] Add API endpoints for fetching the stock prices
+- [ ] Add & configure linting in the frontend
+- [ ] Add typefaces & icons for the frontend
+- [ ] Add component library
+- [ ] Add routing for the frontend application
 
 ## Authors
 
