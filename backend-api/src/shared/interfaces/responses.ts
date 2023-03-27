@@ -19,3 +19,18 @@ export interface Quote {
 export interface QuoteResponse {
   result: Quote[];
 }
+
+export interface Security {
+  exchange: string;
+  shortname: string;
+  quoteType: string;
+  symbol: string;
+  typeDisp: string;
+  longname: string;
+  exchDisp: string;
+  sector: string;
+}
+
+export interface SecuritiesResponse {
+  quotes: Security[];
+}
