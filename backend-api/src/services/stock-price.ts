@@ -3,16 +3,12 @@ import fetch from 'node-fetch';
 
 import configs from '@src/configs';
 import StockPriceRepository from '@src/repositories/stock-price';
-import { QuoteResponse } from '@src/shared/interfaces';
+import { Paginate, PaginatedResponse, QuoteResponse, StockPriceModel } from '@src/shared/interfaces';
 
 @Service()
 export default class StockPriceService {
   @Inject()
   public stockPriceRepository: StockPriceRepository;
-
-  public getStockPrices(): void {
-    this.stockPriceRepository.getAll();
-  }
 
   public async createStockPrice(tickerSymbol: string): Promise<void> {
     try {
@@ -54,6 +50,21 @@ export default class StockPriceService {
   public async deleteStockPrice(tickerSymbol: string): Promise<void> {
     try {
       await this.stockPriceRepository.delete(tickerSymbol);
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  public async getStockPrices(params: Paginate): Promise<PaginatedResponse<StockPriceModel>> {
+    try {
+      const { results, total } = await this.stockPriceRepository.getAll(params);
+
+      return {
+        total,
+        data: results,
+        pageSize: Number(params.pageSize),
+        page: Number(params.page),
+      };
     } catch (err) {
       throw err;
     }
