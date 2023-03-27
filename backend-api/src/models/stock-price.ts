@@ -1,23 +1,15 @@
 import { Optional } from 'sequelize';
 import { Table, Model, CreatedAt, UpdatedAt, Column, DataType } from 'sequelize-typescript';
 
-interface StockPriceAttributes {
-  id: number;
-  companyName: string;
-  tickerSymbol: string;
-  currentPrice: number;
-  changePercent: number;
-  createdAt: Date;
-  updatedAt: Date;
-}
+import { StockPriceModel } from '@src/shared/interfaces';
 
-type StockPriceCreationAttributes = Optional<StockPriceAttributes, 'id' | 'createdAt' | 'updatedAt'>;
+type StockPriceCreationAttributes = Optional<StockPriceModel, 'id' | 'createdAt' | 'updatedAt'>;
 
 @Table({
   modelName: 'StockPrice',
   tableName: 'stock_prices',
 })
-export default class StockPrice extends Model<StockPriceAttributes, StockPriceCreationAttributes> {
+export default class StockPrice extends Model<StockPriceModel, StockPriceCreationAttributes> {
   @Column(DataType.STRING)
   companyName!: string;
 
