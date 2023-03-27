@@ -22,6 +22,8 @@
 - [x] Add ORM for database abstraction & querying
 - [x] Add database seeders for initial data to be stored
 - [x] Add dependency injection for the backend services & repositories
+- [x] Add paginated response for the stock prices
+- [ ] Add API endpoints for fetching the stock prices
 
 ## Authors
 

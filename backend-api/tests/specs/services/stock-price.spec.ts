@@ -110,4 +110,30 @@ describe('src/services/stock-price.ts: class StockPriceService', () => {
       expect(deleteMock).toHaveBeenCalled();
     });
   });
+
+  describe('getStockPrices()', () => {
+    const getAllMock = jest.fn();
+
+    it('should call the getAll method from repository class', async () => {
+      StockPriceRepository.prototype.getAll = getAllMock.mockResolvedValue({ results: [], total: 0 });
+
+      await new StockPriceService().getStockPrices({ page: '1', pageSize: '5' });
+
+      expect(getAllMock).toHaveBeenCalled();
+    });
+
+    it('should handle errors from the getAll method', async () => {
+      StockPriceRepository.prototype.getAll = getAllMock.mockRejectedValue(new Error('SOME ERROR!'));
+
+      try {
+        await new StockPriceService().getStockPrices({ page: '1', pageSize: '5' });
+      } catch (err) {
+        const error = err as Error;
+
+        expect(error.message).toEqual('SOME ERROR!');
+      }
+
+      expect(getAllMock).toHaveBeenCalled();
+    });
+  });
 });

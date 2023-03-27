@@ -1,8 +1,8 @@
 import { Service } from 'typedi';
 
-import { BaseRepository, StockPriceModel } from '@src/shared/interfaces';
 import StockPrice from '@src/models/stock-price';
 import NotFoundError from '@src/shared/errors/not-found';
+import { BaseRepository, Paginate, StockPriceModel } from '@src/shared/interfaces';
 
 @Service()
 export default class StockPriceRepository implements BaseRepository<StockPriceModel> {
@@ -53,7 +53,28 @@ export default class StockPriceRepository implements BaseRepository<StockPriceMo
     }
   }
 
-  public getAll() {
-    console.log('Getting all the stocks');
+  public async getAll({
+    page,
+    pageSize,
+    col,
+    order,
+  }: Paginate): Promise<{ results: StockPriceModel[]; total: number }> {
+    try {
+      const offset = Number(page) * Number(pageSize);
+      const limit = Number(pageSize);
+
+      col = col ? col : 'createdAt';
+      order = order ? order : 'ASC';
+
+      const { count, rows } = await StockPrice.findAndCountAll({
+        offset,
+        limit,
+        order: [[col, order]],
+      });
+
+      return { results: rows, total: count };
+    } catch (err) {
+      throw err;
+    }
   }
 }
