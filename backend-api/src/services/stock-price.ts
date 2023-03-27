@@ -3,7 +3,15 @@ import fetch from 'node-fetch';
 
 import configs from '@src/configs';
 import StockPriceRepository from '@src/repositories/stock-price';
-import { Paginate, PaginatedResponse, QuoteResponse, StockPriceModel } from '@src/shared/interfaces';
+import {
+  AppResponse,
+  Paginate,
+  PaginatedResponse,
+  QuoteResponse,
+  SecuritiesResponse,
+  Security,
+  StockPriceModel,
+} from '@src/shared/interfaces';
 
 @Service()
 export default class StockPriceService {
@@ -65,6 +73,17 @@ export default class StockPriceService {
         pageSize: Number(params.pageSize),
         page: Number(params.page),
       };
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  public async getSecuritiesByQuery(query: string): Promise<AppResponse<Security[]>> {
+    try {
+      const response = await fetch(`${configs.app.yahooFinanceBaseUrl}/v1/finance/search?q=${query}`);
+      const { quotes } = (await response.json()) as SecuritiesResponse;
+
+      return { data: quotes };
     } catch (err) {
       throw err;
     }
