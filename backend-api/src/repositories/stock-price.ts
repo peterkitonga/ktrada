@@ -5,7 +5,7 @@ import StockPrice from '@src/models/stock-price';
 import NotFoundError from '@src/shared/errors/not-found';
 
 @Service()
-export class StockPriceRepository implements BaseRepository<StockPriceModel> {
+export default class StockPriceRepository implements BaseRepository<StockPriceModel> {
   public async create(item: StockPriceModel): Promise<boolean> {
     try {
       const stockPrice = new StockPrice(item);

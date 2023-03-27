@@ -2,13 +2,13 @@ import { Service, Inject } from 'typedi';
 import fetch from 'node-fetch';
 
 import configs from '@src/configs';
-import { StockPriceRepository } from '@src/repositories/stock-price';
+import StockPriceRepository from '@src/repositories/stock-price';
 import { QuoteResponse } from '@src/shared/interfaces';
 
 @Service()
-export class StockPriceService {
+export default class StockPriceService {
   @Inject()
-  private stockPriceRepository: StockPriceRepository;
+  public stockPriceRepository: StockPriceRepository;
 
   public getStockPrices(): void {
     this.stockPriceRepository.getAll();
