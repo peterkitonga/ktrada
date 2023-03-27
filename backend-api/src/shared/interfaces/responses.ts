@@ -3,6 +3,12 @@ export interface AppResponse<DataType> {
   data?: DataType;
 }
 
+export interface PaginatedResponse<DataType> extends AppResponse<DataType[]> {
+  total: number;
+  pageSize: number;
+  page: number;
+}
+
 export interface Quote {
   shortName: string;
   symbol: string;
