@@ -21,7 +21,7 @@
 - [x] Add Jest to backend application
 - [x] Add ORM for database abstraction & querying
 - [x] Add database seeders for initial data to be stored
-- [ ] Add dependency injection for the backend services & repositories
+- [x] Add dependency injection for the backend services & repositories
 
 ## Authors
 
