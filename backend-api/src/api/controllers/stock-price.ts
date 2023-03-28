@@ -44,4 +44,21 @@ export default class StockPricesController {
       next(err);
     }
   }
+
+  @Autobind
+  public async createStockPrice(
+    req: Request<unknown, unknown, { symbol: string }>,
+    res: Response<AppResponse<null>>,
+    next: NextFunction,
+  ): Promise<void> {
+    try {
+      const request = req.body;
+
+      await this.stockPriceService.createStockPrice(request.symbol);
+
+      res.status(HttpStatusCodes.CREATED).json({ message: 'created' });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
