@@ -30,7 +30,8 @@
 - [x] Add routing for the frontend application
 - [x] Add responsive table with pagination and sample data
 - [x] Add services & interceptors for pulling stock prices
-- [ ] Add searchable select for querying securities list
+- [x] Add searchable select for querying securities list
+- [x] Add project setup instructions
 
 ## Environment Setup
 
