@@ -25,8 +25,8 @@
 - [x] Add paginated response for the stock prices
 - [x] Add API endpoints for fetching the stock prices
 - [x] Add & configure linting in the frontend
-- [ ] Add typefaces & icons for the frontend
-- [ ] Add component library
+- [x] Add typefaces & icons for the frontend
+- [x] Add component library
 - [ ] Add routing for the frontend application
 
 ## Authors
