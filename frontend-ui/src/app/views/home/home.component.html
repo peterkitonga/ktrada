@@ -54,3 +54,22 @@
     </p-card>
   </section>
 </main>
+<p-dialog
+  header="Search Company"
+  [(visible)]="isVisibleDialog"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <form [formGroup]="formGroup" class="form-custom">
+    <p-autoComplete
+      appendTo="body"
+      formControlName="selected"
+      [suggestions]="filteredSecurities"
+      (completeMethod)="filterSecurities($event)"
+      field="longname"
+    ></p-autoComplete>
+    <p-button label="Add to List" type="submit" (click)="addToList()"></p-button>
+  </form>
+</p-dialog>
