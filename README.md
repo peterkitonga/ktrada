@@ -28,6 +28,71 @@
 - [x] Add typefaces & icons for the frontend
 - [x] Add component library
 - [x] Add routing for the frontend application
+- [x] Add responsive table with pagination and sample data
+- [x] Add services & interceptors for pulling stock prices
+- [ ] Add searchable select for querying securities list
+
+## Environment Setup
+
+To begin running the project, first in the _**backend/**_ folder copy the example variables into a `.env` file with command: `cp .env.example .env`. You will then need to modify the following environment variables in the `.env` file for your API to run:
+
+- `NODE_ENV` - `production` or `development`
+
+- `CLIENT_BASE_URL` - base url for the front-end client application
+
+- `DATABASE_*` - variables for the mysql database
+
+## Run Frontend Locally
+
+Go to the **frontend/** directory
+
+```bash
+  cd frontend
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the development server
+
+```bash
+  npm start
+```
+
+## Run Backend Locally
+
+Go to the **backend/** directory
+
+```bash
+  cd backend
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Run database migrations
+
+```bash
+  npm run db:migrate
+```
+
+Run database seeders to add initial data
+
+```bash
+  npm run db:seed
+```
+
+Start the development server
+
+```bash
+  npm start
+```
 
 ## Authors
 
