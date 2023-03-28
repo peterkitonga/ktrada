@@ -27,7 +27,7 @@
 - [x] Add & configure linting in the frontend
 - [x] Add typefaces & icons for the frontend
 - [x] Add component library
-- [ ] Add routing for the frontend application
+- [x] Add routing for the frontend application
 
 ## Authors
 
