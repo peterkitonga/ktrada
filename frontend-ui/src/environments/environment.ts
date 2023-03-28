@@ -4,6 +4,9 @@
 
 export const environment = {
   production: false,
+  api: {
+    baseUrl: 'http://127.0.0.1:8180/api/v1',
+  },
 };
 
 /*
