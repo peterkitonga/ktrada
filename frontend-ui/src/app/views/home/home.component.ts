@@ -1,10 +1,12 @@
+import { FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+
+import { Table } from 'primeng/table';
 import { MenuItem, SortEvent } from 'primeng/api';
 
-import { StockPrice } from '@src/app/shared/interfaces';
+import { Security, StockPrice } from '@src/app/shared/interfaces';
 import { StockPriceService } from '@src/app/shared/services/stock-price.service';
 import { HttpProgressService } from '@src/app/shared/services/http-progress.service';
-import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-home',
@@ -22,18 +24,28 @@ export class HomeComponent implements OnInit {
   menuItems!: { label: string; items: MenuItem[] }[];
 
   first: number = 0;
-  rows: number = 10;
+  rows: number = 5;
   total: number = 0;
 
   isLoading: boolean = false;
+
+  isVisibleDialog!: boolean;
+
+  securities!: Security[];
+
+  formGroup!: FormGroup;
+
+  filteredSecurities!: Security[];
 
   constructor(private stockPriceService: StockPriceService, private httpProgressService: HttpProgressService) {}
 
   ngOnInit(): void {
     this.getStockPrices();
+
     this.httpProgressService.progressCheck.subscribe((value) => {
       this.isLoading = value;
     });
+
     this.cols = [
       { field: 'companyName', header: 'Company Name' },
       { field: 'tickerSymbol', header: 'Ticker Symbol' },
@@ -41,6 +53,7 @@ export class HomeComponent implements OnInit {
       { field: 'changePercent', header: 'Change (in Percentage)' },
       { field: '_', header: 'Actions' },
     ];
+
     this.menuItems = [
       {
         label: 'Actions',
@@ -56,18 +69,20 @@ export class HomeComponent implements OnInit {
             label: 'Add to List',
             icon: 'bi bi-plus-lg',
             command: () => {
-              //
+              this.showDialog();
             },
           },
         ],
       },
     ];
+
     const sortSingleDelegate = this.dataTable.sortSingle;
     this.dataTable.sortSingle = () => {
       if (!this._withinOnChanges) {
         sortSingleDelegate.call(this.dataTable);
       }
     };
+
     const ngOnChangesDelegate = this.dataTable.ngOnChanges;
     this.dataTable.ngOnChanges = (changes: SimpleChanges) => {
       this._withinOnChanges = true;
@@ -77,6 +92,10 @@ export class HomeComponent implements OnInit {
         this._withinOnChanges = false;
       }
     };
+
+    this.formGroup = new FormGroup({
+      selected: new FormControl<Security | null>(null),
+    });
   }
 
   onPageChange(event: { first: number; rows: number }) {
@@ -112,6 +131,41 @@ export class HomeComponent implements OnInit {
             this.total = response.total!;
           },
         });
+    }
+  }
+
+  showDialog(): void {
+    this.isVisibleDialog = true;
+  }
+
+  filterSecurities(event: { query: string }) {
+    let filtered: Security[] = [];
+    let query = event.query;
+
+    if (query.length >= 3) {
+      this.stockPriceService.getSecurities(query).subscribe({
+        next: (response) => {
+          for (let i = 0; i < response.data.length; i++) {
+            let security = response.data[i];
+            if (security.longname.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+              filtered.push(security);
+            }
+          }
+
+          this.filteredSecurities = filtered;
+        },
+      });
+    }
+  }
+
+  addToList(): void {
+    if (this.formGroup.valid) {
+      this.stockPriceService.createStockPrice(this.formGroup.value.selected.symbol).subscribe({
+        next: () => {
+          this.isVisibleDialog = false;
+          this.getStockPrices();
+        },
+      });
     }
   }
 }

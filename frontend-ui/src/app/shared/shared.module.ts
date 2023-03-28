@@ -10,6 +10,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { MenuModule } from 'primeng/menu';
     AutoCompleteModule,
     ButtonModule,
     MenuModule,
+    DialogModule,
   ],
   exports: [
     CommonModule,
@@ -35,6 +37,7 @@ import { MenuModule } from 'primeng/menu';
     AutoCompleteModule,
     ButtonModule,
     MenuModule,
+    DialogModule,
   ],
 })
 export class SharedModule {}

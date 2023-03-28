@@ -4,3 +4,10 @@
   align-items: center;
   min-height: 100vh;
 }
+
+.form-custom {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+}
