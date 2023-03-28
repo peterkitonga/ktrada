@@ -11,4 +11,5 @@ export default (appRouter: Router): void => {
 
   router.get('/securities', stockPricesController.getSecurities);
   router.get('/', stockPricesController.getStockPrices);
+  router.post('/', stockPricesController.createStockPrice);
 };
