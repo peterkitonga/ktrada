@@ -1,0 +1,16 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+	box-sizing: border-box;
+}
+
+main {
+  position: relative;
+  min-height: 100vh;
+}
